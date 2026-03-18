@@ -1,0 +1,31 @@
+kube-prometheus-stack:
+  grafana:
+    enabled: true
+    adminPassword: "prom-password"
+    persistence:
+      enabled: true
+      storageClassName: standard
+      size: 5Gi
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - grafana.local
+
+  prometheus:
+    server:
+      persistentVolume:
+        enabled: true
+        storageClassName: standard
+        size: 10Gi
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - prometheus.local
+
+  alertmanager:
+    persistentVolume:
+      enabled: true
+      storageClassName: standard
+      size: 2Gi
