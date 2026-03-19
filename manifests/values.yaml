@@ -69,9 +69,9 @@ kube-prometheus-stack:
   #       cpu: 50m
   #       memory: 32Mi
 
-  # grafana:
-  #   enabled: true
-  #   adminPassword: "changeme123"
+  grafana:
+    enabled: true
+    adminPassword: "changeme123"
 
   #   resources:
   #     requests:
