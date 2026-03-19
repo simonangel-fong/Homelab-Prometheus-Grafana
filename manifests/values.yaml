@@ -1,93 +1,84 @@
 kube-prometheus-stack:
 
+  grafana:
+    enabled: false                  # using Grafana Cloud instead
+
   prometheus:
     prometheusSpec:
+      scrapeInterval: "60s"
+      evaluationInterval: "60s"
+      retention: 3d
+
+      remoteWrite:
+        - url: https://prometheus-prod-32-prod-ca-east-0.grafana.net/api/prom/push
+          basicAuth:
+            username:
+              name: grafana-cloud-secret
+              key: username
+            password:
+              name: grafana-cloud-secret
+              key: password
+
       resources:
         requests:
-          cpu: 500m
-          memory: 1Gi
+          cpu: 100m
+          memory: 256Mi
         limits:
-          cpu: 2000m
-          memory: 2Gi
+          cpu: 300m
+          memory: 512Mi
 
-  # alertmanager:
-  #   alertmanagerSpec:
-  #     resources:
-  #       requests:
-  #         cpu: 10m
-  #         memory: 32Mi
-  #       limits:
-  #         cpu: 50m
-  #         memory: 64Mi
+  alertmanager:
+    alertmanagerSpec:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          cpu: 50m
+          memory: 64Mi
 
-  # prometheusOperator:
-  #   admissionWebhooks:
-  #     enabled: true              # prevents apiserver crash
-  #     patch:
-  #       enabled: false
-  #   tls:
-  #     enabled: false
-  #   resources:
-  #     requests:
-  #       cpu: 50m
-  #       memory: 64Mi
-  #     limits:
-  #       cpu: 100m
-  #       memory: 128Mi
+  prometheusOperator:
+    admissionWebhooks:
+      enabled: false
+      patch:
+        enabled: false
+    tls:
+      enabled: false
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
 
-  # kubeStateMetrics:
-  #   enabled: true
-
-  # nodeExporter:
-  #   enabled: true
-
-  # defaultRules:
-  #   create: true
-  #   rules:
-  #     etcd: false
-  #     kubeSchedulerAlerting: false
-  #     kubeSchedulerRecording: false
-
-  # kube-state-metrics:
-  #   resources:
-  #     requests:
-  #       cpu: 10m
-  #       memory: 32Mi
-  #     limits:
-  #       cpu: 50m
-  #       memory: 64Mi
-
-  # prometheus-node-exporter:
-  #   resources:
-  #     requests:
-  #       cpu: 10m
-  #       memory: 16Mi
-  #     limits:
-  #       cpu: 50m
-  #       memory: 32Mi
-
-  grafana:
+  kubeStateMetrics:
     enabled: true
-    adminPassword: "changeme123"
 
-    # resources:
-    #   requests:
-    #     memory: 256Mi
-    #     cpu: 100m
-    #   limits:
-    #     memory: 512Mi
-    #     cpu: 500m
+  nodeExporter:
+    enabled: true
 
-  #   initChownData:
-  #     enabled: false   
+  defaultRules:
+    create: true
+    rules:
+      etcd: false
+      kubeSchedulerAlerting: false
+      kubeSchedulerRecording: false
 
-  #   persistence:
-  #     enabled: true
-  #     storageClassName: standard
-  #     size: 5Gi
+  kube-state-metrics:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 50m
+        memory: 64Mi
 
-  #   ingress:
-  #     enabled: true
-  #     ingressClassName: nginx
-  #     hosts:
-  #       - grafana.local
+  prometheus-node-exporter:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 50m
+        memory: 32Mi
