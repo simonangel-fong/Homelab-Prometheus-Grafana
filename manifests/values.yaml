@@ -1,8 +1,5 @@
 kube-prometheus-stack:
 
-  grafana:
-    enabled: false                 # start without grafana
-
   prometheus:
     prometheusSpec:
       scrapeInterval: "60s"
@@ -71,3 +68,32 @@ kube-prometheus-stack:
       limits:
         cpu: 50m
         memory: 32Mi
+
+  grafana:
+    enabled: true
+    adminPassword: "changeme123"
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+      limits:
+        cpu: 200m
+        memory: 512Mi
+
+    sidecar:
+      dashboards:
+        enabled: false
+      datasources:
+        enabled: false
+
+    persistence:
+      enabled: true
+      storageClassName: standard
+      size: 5Gi
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - grafana.local
