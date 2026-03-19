@@ -4,6 +4,14 @@ kube-prometheus-stack:
     enabled: false                  # using Grafana Cloud instead
 
   prometheus:
+    ingress:         
+      enabled: true
+      ingressClassName: nginx    
+      hosts:
+        - homelab-prometheus.arguswatcher.net
+      paths:
+        - /
+        
     prometheusSpec:
       scrapeInterval: "60s"
       evaluationInterval: "60s"
@@ -26,12 +34,6 @@ kube-prometheus-stack:
         limits:
           cpu: 300m
           memory: 512Mi
-    
-    ingress:
-      enabled: true
-      hosts:
-        - homelab-prometheus.arguswatcher.net
-
 
   alertmanager:
     alertmanagerSpec:
