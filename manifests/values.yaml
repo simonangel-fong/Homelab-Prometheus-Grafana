@@ -1,12 +1,13 @@
 kube-prometheus-stack:
 
+  grafana:
+    enabled: false                 # start without grafana
+
   prometheus:
     prometheusSpec:
-      scrapeInterval: "60s"        # default is 15s
+      scrapeInterval: "60s"
       evaluationInterval: "60s"
-
       retention: 3d
-
       resources:
         requests:
           cpu: 100m
@@ -14,15 +15,6 @@ kube-prometheus-stack:
         limits:
           cpu: 300m
           memory: 512Mi
-
-  grafana:
-    resources:
-      requests:
-        cpu: 50m
-        memory: 64Mi
-      limits:
-        cpu: 200m
-        memory: 256Mi
 
   alertmanager:
     alertmanagerSpec:
@@ -34,20 +26,13 @@ kube-prometheus-stack:
           cpu: 50m
           memory: 64Mi
 
-  kubeStateMetrics:
-    enabled: true  
-
-  nodeExporter:
-    enabled: true  
-
-  defaultRules:
-    create: true
-    rules:
-      etcd: false
-      kubeSchedulerAlerting: false
-      kubeSchedulerRecording: false
-
   prometheusOperator:
+    admissionWebhooks:
+      enabled: false              # prevents apiserver crash
+      patch:
+        enabled: false
+    tls:
+      enabled: false
     resources:
       requests:
         cpu: 50m
@@ -55,6 +40,19 @@ kube-prometheus-stack:
       limits:
         cpu: 100m
         memory: 128Mi
+
+  kubeStateMetrics:
+    enabled: true
+
+  nodeExporter:
+    enabled: true
+
+  defaultRules:
+    create: true
+    rules:
+      etcd: false
+      kubeSchedulerAlerting: false
+      kubeSchedulerRecording: false
 
   kube-state-metrics:
     resources:
