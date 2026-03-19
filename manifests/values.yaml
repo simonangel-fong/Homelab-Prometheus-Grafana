@@ -2,16 +2,13 @@ kube-prometheus-stack:
 
   prometheus:
     prometheusSpec:
-      scrapeInterval: "60s"
-      evaluationInterval: "60s"
-      retention: 3d
       resources:
         requests:
-          cpu: 100m
-          memory: 256Mi
+          cpu: 500m
+          memory: 1Gi
         limits:
-          cpu: 300m
-          memory: 512Mi
+          cpu: 2000m
+          memory: 2Gi
 
   # alertmanager:
   #   alertmanagerSpec:
@@ -73,13 +70,13 @@ kube-prometheus-stack:
     enabled: true
     adminPassword: "changeme123"
 
-  #   resources:
-  #     requests:
-  #       cpu: 100m
-  #       memory: 512Mi
-  #     limits:
-  #       cpu: 500m
-  #       memory: 1024Mi
+    # resources:
+    #   requests:
+    #     memory: 256Mi
+    #     cpu: 100m
+    #   limits:
+    #     memory: 512Mi
+    #     cpu: 500m
 
   #   initChownData:
   #     enabled: false   
