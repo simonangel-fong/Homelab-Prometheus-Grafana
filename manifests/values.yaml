@@ -25,7 +25,7 @@ kube-prometheus-stack:
 
   prometheusOperator:
     admissionWebhooks:
-      enabled: false              # prevents apiserver crash
+      enabled: true              # prevents apiserver crash
       patch:
         enabled: false
     tls:
