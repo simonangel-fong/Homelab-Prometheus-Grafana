@@ -72,7 +72,9 @@ kube-prometheus-stack:
   grafana:
     enabled: true
     adminPassword: "changeme123"
-
+    initChownData:
+      enabled: false
+      
     resources:
       requests:
         cpu: 50m
