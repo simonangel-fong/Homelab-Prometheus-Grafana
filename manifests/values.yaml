@@ -81,12 +81,6 @@ kube-prometheus-stack:
         cpu: 200m
         memory: 512Mi
 
-    sidecar:
-      dashboards:
-        enabled: false
-      datasources:
-        enabled: false
-
     persistence:
       enabled: true
       storageClassName: standard
