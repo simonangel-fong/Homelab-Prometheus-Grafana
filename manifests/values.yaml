@@ -13,84 +13,84 @@ kube-prometheus-stack:
           cpu: 300m
           memory: 512Mi
 
-  alertmanager:
-    alertmanagerSpec:
-      resources:
-        requests:
-          cpu: 10m
-          memory: 32Mi
-        limits:
-          cpu: 50m
-          memory: 64Mi
+  # alertmanager:
+  #   alertmanagerSpec:
+  #     resources:
+  #       requests:
+  #         cpu: 10m
+  #         memory: 32Mi
+  #       limits:
+  #         cpu: 50m
+  #         memory: 64Mi
 
-  prometheusOperator:
-    admissionWebhooks:
-      enabled: true              # prevents apiserver crash
-      patch:
-        enabled: false
-    tls:
-      enabled: false
-    resources:
-      requests:
-        cpu: 50m
-        memory: 64Mi
-      limits:
-        cpu: 100m
-        memory: 128Mi
+  # prometheusOperator:
+  #   admissionWebhooks:
+  #     enabled: true              # prevents apiserver crash
+  #     patch:
+  #       enabled: false
+  #   tls:
+  #     enabled: false
+  #   resources:
+  #     requests:
+  #       cpu: 50m
+  #       memory: 64Mi
+  #     limits:
+  #       cpu: 100m
+  #       memory: 128Mi
 
-  kubeStateMetrics:
-    enabled: true
+  # kubeStateMetrics:
+  #   enabled: true
 
-  nodeExporter:
-    enabled: true
+  # nodeExporter:
+  #   enabled: true
 
-  defaultRules:
-    create: true
-    rules:
-      etcd: false
-      kubeSchedulerAlerting: false
-      kubeSchedulerRecording: false
+  # defaultRules:
+  #   create: true
+  #   rules:
+  #     etcd: false
+  #     kubeSchedulerAlerting: false
+  #     kubeSchedulerRecording: false
 
-  kube-state-metrics:
-    resources:
-      requests:
-        cpu: 10m
-        memory: 32Mi
-      limits:
-        cpu: 50m
-        memory: 64Mi
+  # kube-state-metrics:
+  #   resources:
+  #     requests:
+  #       cpu: 10m
+  #       memory: 32Mi
+  #     limits:
+  #       cpu: 50m
+  #       memory: 64Mi
 
-  prometheus-node-exporter:
-    resources:
-      requests:
-        cpu: 10m
-        memory: 16Mi
-      limits:
-        cpu: 50m
-        memory: 32Mi
+  # prometheus-node-exporter:
+  #   resources:
+  #     requests:
+  #       cpu: 10m
+  #       memory: 16Mi
+  #     limits:
+  #       cpu: 50m
+  #       memory: 32Mi
 
-  grafana:
-    enabled: true
-    adminPassword: "changeme123"
+  # grafana:
+  #   enabled: true
+  #   adminPassword: "changeme123"
 
-    resources:
-      requests:
-        cpu: 100m
-        memory: 512Mi
-      limits:
-        cpu: 500m
-        memory: 1024Mi
+  #   resources:
+  #     requests:
+  #       cpu: 100m
+  #       memory: 512Mi
+  #     limits:
+  #       cpu: 500m
+  #       memory: 1024Mi
 
-    initChownData:
-      enabled: false   
+  #   initChownData:
+  #     enabled: false   
 
-    persistence:
-      enabled: true
-      storageClassName: standard
-      size: 5Gi
+  #   persistence:
+  #     enabled: true
+  #     storageClassName: standard
+  #     size: 5Gi
 
-    ingress:
-      enabled: true
-      ingressClassName: nginx
-      hosts:
-        - grafana.local
+  #   ingress:
+  #     enabled: true
+  #     ingressClassName: nginx
+  #     hosts:
+  #       - grafana.local
