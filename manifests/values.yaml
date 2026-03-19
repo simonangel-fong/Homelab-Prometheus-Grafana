@@ -27,6 +27,11 @@ kube-prometheus-stack:
           cpu: 300m
           memory: 512Mi
 
+  ingress:
+    enabled: true
+    hosts:
+      - homelab-prometheus.arguswatcher.net
+
   alertmanager:
     alertmanagerSpec:
       resources:
